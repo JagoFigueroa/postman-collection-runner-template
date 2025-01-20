@@ -10,7 +10,6 @@ jobs:
   test-Safe-APIs:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
       - name: Install Node
@@ -33,7 +32,7 @@ jobs:
         run: |
           newman run ./collections/rick_and_morty_collection.json -e ./collections/rick_and_morty_environment.json --delay-request 40 -r cli,ctrf-json --reporter-ctrf-json-output-file api-test_run-report.json --reporter-ctrf-json-output-dir ./reports
 
-     # Generates test report
+      # Generates test report
       - name: Generate test report
         run: npx github-actions-ctrf community ./reports/api-test_run-report.json summary-short
         if: always()
